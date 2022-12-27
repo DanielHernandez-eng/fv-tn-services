@@ -1,0 +1,400 @@
+/* Start single product banner */
+#fv-p-container {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  
+    position: relative;
+    width: 320px;
+    height: 170px;
+  
+    background: #ffffff;
+    border-radius: 10px;
+  }
+  
+  #fv-p-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  
+    width: 90px;
+    height: 90px;
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-p-line {
+    border-left: 2px solid #1e87c1;
+    height: 65px;
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  #fv-p-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+  
+    width: 180px;
+    height: 163px;
+  
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  
+  #fv-p-text1-blue {
+    width: 247px;
+    height: 30px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+  
+    color: #1e87c1;
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-p-text1-black {
+    padding-left: 10px;
+    color: #000000;
+  }
+  
+  #fv-p-text2 {
+    width: 247px;
+    height: 30px;
+  
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 70px;
+  
+    display: flex;
+    align-items: center;
+  
+    color: #1e3159;
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  #fv-p-text3 {
+    width: 209px;
+    height: 30px;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+  
+    color: #000000;
+  
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  /* End single product banner */
+  
+  /* Start cart credit range */
+  #fv-c-container {
+    font-family: "Inter", sans-serif;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    position: relative;
+    width: 400px;
+    height: 200px;
+      margin-top: 30px;
+  
+    background: #ffffff;
+    border-radius: 10px;
+  }
+  #fv-c-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  
+    height: auto;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-c-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  
+    width: 90px;
+    height: 90px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-c-text1 {
+    font-family: "Inter";
+    font-style: normal;
+    font-size: 20px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+    color: #1e87c1;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  .fv-c-text1-bold {
+    padding: 0 7px;
+    font-weight: 600;
+  }
+  #fv-c-line {
+    border-bottom: 2px solid #1e87c1;
+    width: 300px;
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  #fv-c-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  
+    height: auto;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  
+  #fv-c-text2 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+    /* or 150% */
+  
+    display: flex;
+    align-items: center;
+  
+    color: #1e3159;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-c-text3 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+    /* or 150% */
+  
+    display: flex;
+    align-items: center;
+  
+    color: #1e3159;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .fv-c-amount {
+    padding: 0 7px;
+    color: #1e87c1;
+  }
+  /* End cart credit range */
+  
+  /* Start checkout payment gateway */
+  #fv-check-container {
+    font-family: "Inter";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 17px;
+  
+    position: relative;
+  
+    background: #ffffff;
+    border-radius: 10px;
+  }
+  
+  #fv-check-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 6px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  #fv-check-img {
+    width: 90px;
+  }
+  
+  #fv-check-text1 {
+    font-family: "Inter";
+    font-style: normal;
+    font-size: 25px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+    color: #1e87c1;
+  }
+  
+  #fv-check-text1-bold {
+    font-weight: 600;
+    padding: 0 7px;
+  }
+  
+  #fv-check-line {
+    border-bottom: 2px solid #1e87c1;
+    width: 270px;
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  #fv-check-text2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    height: 36px;
+    padding: 0px;
+    gap: 50px;
+    color: #1e87c1;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  
+  #fv-check-text3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    height: 36px;
+    padding: 0px;
+    gap: 47px;
+  
+    background: rgba(30, 135, 193, 0.1);
+    border-radius: 10px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+  }
+  
+  #fv-check-text4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 40px 0px 0px; */
+    gap: 15px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+  }
+  
+  .fv-check-text-light {
+    font-weight: 600;
+    font-size: 20px;
+    color: #1e87c1;
+    margin-left: 5px;
+    width: 160px;
+  }
+  
+  .fv-check-text-bold {
+    font-weight: 700;
+    font-size: 25px;
+    color: #1e87c1;
+  }
+  
+  .fv-check-link {
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: underline;
+    outline: none;
+    color: #1e87c1;
+  }
+  /* End checkout payment gateway */
+  

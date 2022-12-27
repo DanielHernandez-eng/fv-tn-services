@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include ('partials/head') %>
+    <title>finvero</title>
+  </head>
+
+  <body>
+    <div
+      class="container vh-100 d-flex justify-content-center align-items-center"
+    >
+      <div class="card bg-light textw-white text-center">
+        <div class="card-header">
+          <h3>Configuracion finvero</h3>
+        </div>
+        <div class="card-body text-start">
+          <div class="row g-3">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="txtSIDT"
+                placeholder="Shop id (tiendanube)"
+              />
+              <label for="floatingInput">Shop id (tiendanube)</label>
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" id="btnLookInfo">
+                Continuar
+              </button>
+            </div>
+            <div id="hiden-form" class="collapse row g-3">
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  placeholder="ID token (finvero)"
+                  id="txtIDT"
+                  style="height: 100px"
+                ></textarea>
+                <label for="txtIDT">ID token (finvero)</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtSIDF"
+                  placeholder="Shop id (finvero)"
+                />
+                <label for="floatingInput">Shop id (finvero)</label>
+              </div>
+              <div class="col-12">
+                <button id="btnSaveD" class="btn btn-primary">
+                  Guardar Configuracion
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="liveAlertPlaceholder" class="container d-flex justify-content-center align-items-center">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/js/main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
