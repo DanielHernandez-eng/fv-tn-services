@@ -2,6 +2,10 @@ let params = new URL(document.location).searchParams;
 let codeTN = params.get("code");
 let acsT, scopeD, userId;
 let nuevo = false;
+// let apiFinvero= "http://localhost:3000/merchants/";
+let apiFinvero = "https://fv-tn-services-production.up.railway.app/merchants/";
+// let baseUrl = "http://localhost:3000/";
+let baseUrl = "https://fv-tn-services-production.up.railway.app/";
 
 let buttonSearchInfo = document.getElementById("btnLookInfo");
 buttonSearchInfo.addEventListener("click", searchMerchantData);
@@ -14,7 +18,6 @@ let shopIDF = document.getElementById("txtSIDF");
 let shopIDT = document.getElementById("txtSIDT");
 let hidenForm = document.getElementById("hiden-form");
 const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
-
 
 const showAlert = (message, type) => {
   const wrapper = document.createElement("div");
@@ -37,8 +40,8 @@ if (codeTN) {
   fetch("https://www.tiendanube.com/apps/authorize/token", {
     method: "POST",
     body: JSON.stringify({
-      client_id: "5602",
-      client_secret: "Qbu78wIK8w3z7mnZK34oG8eCBPKJRhA14RLzbDffaukI2Dgz",
+      client_id: "5608",
+      client_secret: "GrGoqLq7bwIYpQnkND8wIC3k8aIQAUVs2RujB77k5qMaGpra",
       grant_type: "authorization_code",
       code: codeTN,
     }),
@@ -60,7 +63,7 @@ if (codeTN) {
 function searchMerchantData() {
   let idtn = shopIDT.value;
   if (idtn) {
-    fetch(`http://localhost:3000/merchants/${idtn}`)
+    fetch(`${apiFinvero}${idtn}`)
       .then((res) => res.json())
       .then((res) => {
         if (res != null) {
@@ -89,7 +92,7 @@ function saveData() {
   if (idToken.value && shopIDF.value) {
     if (nuevo) {
       if (acsT && scopeD && userId) {
-        fetch(`http://localhost:3000/merchants`, {
+        fetch(apiFinvero, {
           method: "POST",
           body: JSON.stringify({
             shop_id: idToken.value,
@@ -108,13 +111,13 @@ function saveData() {
         fetch(`https://api.tiendanube.com/v1/${userId}/scripts`, {
           method: "POST",
           body: JSON.stringify({
-            src: "http://localhost:3000/fv-tn-services/src/public/js/script-store-front.js",
+            src: `${baseUrl}fv-tn-services/src/public/js/script-store-front.js`,
             event: "onfirstinteraction",
-            where: "store,checkout"
+            where: "store,checkout",
           }),
-          headers: { 
+          headers: {
             "Content-type": "application/json",
-            "Authentication": `bearer ${acsT}`
+            Authentication: `bearer ${acsT}`,
           },
         })
           .then((res) => res.json())
@@ -124,7 +127,7 @@ function saveData() {
         showAlert("credenciales tiendanube vacias", "danger");
       }
     } else {
-      fetch(`http://localhost:3000/merchants/${shopIDT.value}`, {
+      fetch(`${apiFinvero}${shopIDT.value}`, {
         method: "PUT",
         body: JSON.stringify({
           shop_id: shopIDF.value,
