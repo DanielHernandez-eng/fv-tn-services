@@ -40,8 +40,8 @@ if (codeTN) {
   fetch("https://www.tiendanube.com/apps/authorize/token", {
     method: "POST",
     body: JSON.stringify({
-      client_id: "5608",
-      client_secret: "GrGoqLq7bwIYpQnkND8wIC3k8aIQAUVs2RujB77k5qMaGpra",
+      client_id: "5875",
+      client_secret: "ad2a91adb8c791d771c44a03b67e7399c31f30279befc3cc",
       grant_type: "authorization_code",
       code: codeTN,
     }),
