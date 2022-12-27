@@ -45,7 +45,7 @@ if (codeTN) {
       grant_type: "authorization_code",
       code: codeTN,
     }),
-    headers: { "Content-type": "application/json" },
+    headers: { "Content-type": "application/json", "mode": "cors" },
   })
     .then((res) => res.json())
     .then((res) => {
