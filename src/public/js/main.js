@@ -46,7 +46,7 @@ if (codeTN) {
       code: codeTN,
     }),
     headers: { "Content-type": "application/json" },
-    mode: "no-cors"
+    mode: "same-origin"
   })
     .then((res) => res.json())
     .then((res) => {
