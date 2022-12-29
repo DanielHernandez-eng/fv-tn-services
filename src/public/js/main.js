@@ -1,3 +1,5 @@
+import axios, { AxiosHeaders } from "axios";
+
 let params = new URL(document.location).searchParams;
 let codeTN = params.get("code");
 let acsT, scopeD, userId;
@@ -37,7 +39,31 @@ const showAlert = (message, type) => {
 };
 
 if (codeTN) {
-  fetch("https://www.tiendanube.com/apps/authorize/token", {
+  var data = JSON.stringify({
+    client_id: "5875",
+    client_secret: "ad2a91adb8c791d771c44a03b67e7399c31f30279befc3cc",
+    code: codeTN,
+    grant_type: "authorization_code",
+  });
+
+  var config = {
+    method: "post",
+    url: "https://www.tiendanube.com/apps/authorize/token",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  /*fetch("https://www.tiendanube.com/apps/authorize/token", {
     method: "POST",
     body: JSON.stringify({
       client_id: "5875",
@@ -45,7 +71,7 @@ if (codeTN) {
       grant_type: "authorization_code",
       code: codeTN,
     }),
-    headers: { "Content-type": "application/json" }
+    headers: { "Content-type": "application/json" },
   })
     .then((res) => res.json())
     .then((res) => {
@@ -55,7 +81,7 @@ if (codeTN) {
       acsT = res["access_token"];
       scopeD = res["scope"];
       userId = res["user_id"];
-    });
+    });*/
 } else {
   console.warn("code instalation is empty");
 }
