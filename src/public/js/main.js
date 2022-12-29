@@ -1,5 +1,3 @@
-var axios = require('axios');
-
 let params = new URL(document.location).searchParams;
 let codeTN = params.get("code");
 let acsT, scopeD, userId;
