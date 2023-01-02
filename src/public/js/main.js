@@ -37,31 +37,31 @@ const showAlert = (message, type) => {
 };
 
 if (codeTN) {
-  var data = JSON.stringify({
-    client_id: "5875",
-    client_secret: "ad2a91adb8c791d771c44a03b67e7399c31f30279befc3cc",
-    code: codeTN,
-    grant_type: "authorization_code",
-  });
+  // var data = JSON.stringify({
+  //   client_id: "5875",
+  //   client_secret: "ad2a91adb8c791d771c44a03b67e7399c31f30279befc3cc",
+  //   code: codeTN,
+  //   grant_type: "authorization_code",
+  // });
 
-  var config = {
-    method: "post",
-    url: "https://www.tiendanube.com/apps/authorize/token",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data,
-  };
+  // var config = {
+  //   method: "post",
+  //   url: "https://www.tiendanube.com/apps/authorize/token",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   data: data,
+  // };
 
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // axios(config)
+  //   .then(function (response) {
+  //     console.log(JSON.stringify(response.data));
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 
-  /*fetch("https://www.tiendanube.com/apps/authorize/token", {
+  fetch("https://www.tiendanube.com/apps/authorize/token", {
     method: "POST",
     body: JSON.stringify({
       client_id: "5875",
@@ -79,7 +79,7 @@ if (codeTN) {
       acsT = res["access_token"];
       scopeD = res["scope"];
       userId = res["user_id"];
-    });*/
+    });
 } else {
   console.warn("code instalation is empty");
 }
