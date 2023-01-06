@@ -54,7 +54,34 @@ if (codeTN) {
 
   fetch("https://api-qa.finvero.com/api/v1/es/external/auth", requestOptions)
     .then((result) => result.json())
-    .then((result) => console.log( result["token"]))
+    .then((result) => {
+      console.log(result["token"]);
+
+      fetch("https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          client_id: "5895",
+          client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
+          code: codeTN,
+          grant_type: "authorization_code",
+        }),
+        headers: 
+        { 
+          "Content-type": "application/json",
+          "Authorization": "Bearer "+ result["token"]
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(
+            `dato 1: ${res["access_token"]}, dato 2: ${res["scope"]}, dato 3: ${res["user_id"]}`
+          );
+          acsT = res["access_token"];
+          scopeD = res["scope"];
+          userId = res["user_id"];
+        })
+        .catch((error) => console.error("error", error));
+    })
     .catch((error) => console.log("error", error));
 
 } else {
