@@ -1,6 +1,3 @@
-let params = new URL(document.location).searchParams;
-let codeTN = params.get("code");
-let acsT, scopeD, userId;
 let nuevo = false;
 // let apiFinvero= "http://localhost:3000/merchants/";
 let apiFinvero = "https://fv-tn-services-production.up.railway.app/merchants/";
@@ -36,58 +33,6 @@ const showAlert = (message, type) => {
   alertPlaceholder.append(wrapper);
 };
 
-if (codeTN) {
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  var raw = JSON.stringify({
-    token:
-      "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnphRzl3U1dRaU9pSTJaakUyTUdJME1DMDJPRFJsTFRRM09EWXRPVEF3WXkwMllUVmhPVGcwWm1Rek1USWlMQ0oxYzJWeVNXUWlPaUkzTldGa05XTmlZaTFpTUROa0xUUXdaakF0WVdKaU9DMDVOamhqTXpNeU5UVmtabVVpTENKeWIyeGxjeUk2V3lKVFNFOVFYMVZUUlZJaVhTd2lhV0YwSWpveE5qTTNNVEF6TkRZMUxDSmxlSEFpT2pFMk5qZzJOakV3TmpWOS5rQ3VybDBFb2N3NjZHSU5uMURUd19KUzlSNlVvMWVqQkdZS09YLUhweHRN",
-  });
-
-  var requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
-
-  fetch("https://api-qa.finvero.com/api/v1/es/external/auth", requestOptions)
-    .then((result) => result.json())
-    .then((result) => {
-      console.log(result["token"]);
-
-      fetch("https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth", {
-        method: "POST",
-        body: JSON.stringify({
-          client_id: "5895",
-          client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
-          code: codeTN,
-          grant_type: "authorization_code",
-        }),
-        headers: 
-        { 
-          "Content-type": "application/json",
-          "Authorization": "Bearer "+ result["token"]
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(
-            `dato 1: ${res["access_token"]}, dato 2: ${res["scope"]}, dato 3: ${res["user_id"]}`
-          );
-          acsT = res["access_token"];
-          scopeD = res["scope"];
-          userId = res["user_id"];
-        })
-        .catch((error) => console.error("error", error));
-    })
-    .catch((error) => console.log("error", error));
-
-} else {
-  console.warn("code instalation is empty");
-}
-
 function searchMerchantData() {
   let idtn = shopIDT.value;
   if (idtn) {
@@ -117,6 +62,60 @@ function searchMerchantData() {
 }
 
 function saveData() {
+  let params = new URL(document.location).searchParams;
+  let codeTN = params.get("code");
+  let acsT, scopeD, userId;
+
+  if (codeTN) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var raw = JSON.stringify({
+      token:
+        "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnphRzl3U1dRaU9pSTJaakUyTUdJME1DMDJPRFJsTFRRM09EWXRPVEF3WXkwMllUVmhPVGcwWm1Rek1USWlMQ0oxYzJWeVNXUWlPaUkzTldGa05XTmlZaTFpTUROa0xUUXdaakF0WVdKaU9DMDVOamhqTXpNeU5UVmtabVVpTENKeWIyeGxjeUk2V3lKVFNFOVFYMVZUUlZJaVhTd2lhV0YwSWpveE5qTTNNVEF6TkRZMUxDSmxlSEFpT2pFMk5qZzJOakV3TmpWOS5rQ3VybDBFb2N3NjZHSU5uMURUd19KUzlSNlVvMWVqQkdZS09YLUhweHRN",
+    });
+  
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+  
+    fetch("https://api-qa.finvero.com/api/v1/es/external/auth", requestOptions)
+      .then((result) => result.json())
+      .then((result) => {
+        console.log(result["token"]);
+  
+        fetch("https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth", {
+          method: "POST",
+          body: JSON.stringify({
+            client_id: "5895",
+            client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
+            code: codeTN,
+            grant_type: "authorization_code",
+          }),
+          headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + result["token"],
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              `dato 1: ${res["access_token"]}, dato 2: ${res["scope"]}, dato 3: ${res["user_id"]}`
+            );
+            acsT = res["access_token"];
+            scopeD = res["scope"];
+            userId = res["user_id"];
+          })
+          .catch((error) => console.error("error", error));
+      })
+      .catch((error) => console.log("error", error));
+  } else {
+    console.warn("code instalation is empty");
+  }
+
   if (idToken.value && shopIDF.value) {
     if (nuevo) {
       if (acsT && scopeD && userId) {
