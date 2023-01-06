@@ -41,8 +41,8 @@ if (codeTN) {
   fetch("https://api.finvero.com/api/v1/es/external/tiendanube/auth", {
     method: "POST",
     body: JSON.stringify({
-      client_id: "5875",
-      client_secret: "ad2a91adb8c791d771c44a03b67e7399c31f30279befc3cc",
+      client_id: "5895",
+      client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
       grant_type: "authorization_code",
       code: codeTN,
     }),
