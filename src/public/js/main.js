@@ -53,8 +53,8 @@ if (codeTN) {
   };
 
   fetch("https://api-qa.finvero.com/api/v1/es/external/auth", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {result.json(); console.log( result["token"])})
+    .then((result) => result.json())
+    .then((result) => console.log( result["token"]))
     .catch((error) => console.log("error", error));
 
 } else {
