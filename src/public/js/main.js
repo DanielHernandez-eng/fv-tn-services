@@ -37,27 +37,26 @@ const showAlert = (message, type) => {
 };
 
 if (codeTN) {
-  
-  fetch("https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth", {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    token:
+      "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnphRzl3U1dRaU9pSTJaakUyTUdJME1DMDJPRFJsTFRRM09EWXRPVEF3WXkwMllUVmhPVGcwWm1Rek1USWlMQ0oxYzJWeVNXUWlPaUkzTldGa05XTmlZaTFpTUROa0xUUXdaakF0WVdKaU9DMDVOamhqTXpNeU5UVmtabVVpTENKeWIyeGxjeUk2V3lKVFNFOVFYMVZUUlZJaVhTd2lhV0YwSWpveE5qTTNNVEF6TkRZMUxDSmxlSEFpT2pFMk5qZzJOakV3TmpWOS5rQ3VybDBFb2N3NjZHSU5uMURUd19KUzlSNlVvMWVqQkdZS09YLUhweHRN",
+  });
+
+  var requestOptions = {
     method: "POST",
-    body: JSON.stringify({
-      client_id: "5895",
-      client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
-      code: codeTN,
-      grant_type: "authorization_code",
-    }),
-    headers: { "Content-type": "application/json" },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(
-        `dato 1: ${res["access_token"]}, dato 2: ${res["scope"]}, dato 3: ${res["user_id"]}`
-      );
-      acsT = res["access_token"];
-      scopeD = res["scope"];
-      userId = res["user_id"];
-    })
-    .catch((error) => console.error("error", error));
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  fetch("https://api-qa.finvero.com/api/v1/es/external/auth", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+
 } else {
   console.warn("code instalation is empty");
 }
