@@ -43,8 +43,8 @@ if (codeTN) {
     body: JSON.stringify({
       client_id: "5895",
       client_secret: "add51cc55ef65ac36545a21c92d863dc0b9644439d41fc9a",
-      grant_type: "authorization_code",
       code: codeTN,
+      grant_type: "authorization_code",
     }),
     headers: { "Content-type": "application/json" },
   })
