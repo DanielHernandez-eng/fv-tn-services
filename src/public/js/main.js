@@ -38,7 +38,7 @@ const showAlert = (message, type) => {
 
 if (codeTN) {
   
-  fetch("https://api.finvero.com/api/v1/es/external/tiendanube/auth", {
+  fetch("https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth", {
     method: "POST",
     body: JSON.stringify({
       client_id: "5895",
