@@ -5,6 +5,7 @@ import indexRoutes from "./routes/index.js";
 import {mongoose} from "mongoose";
 import dotenv from "dotenv";
 import merchantRoutes from "./routes/merchant.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -18,6 +19,10 @@ app.use(indexRoutes);
 app.use(express.json())
 app.use(merchantRoutes);
 app.use(express.static(join(__dirname, "public")));
+
+app.use(cors({
+  origin: "*"
+}));
 
 app.listen(process.env.PORT || 3000);
 console.log("server is listening on port", process.env.PORT || 3000);
