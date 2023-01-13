@@ -20,15 +20,17 @@ app.use(express.json())
 app.use(merchantRoutes);
 app.use(express.static(join(__dirname, "public")));
 
-app.use(cors({
-  origin: "https://demofinverosapidecv2.mitiendanube.com/"
-}));
 
 app.listen(process.env.PORT || 3000);
 console.log("server is listening on port", process.env.PORT || 3000);
 
 // mongodb conection
 mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() =>console.log("conected to mongodb"))
-  .catch((error) => console.log(error));
+.connect(process.env.MONGODB_URI)
+.then(() =>console.log("conected to mongodb"))
+.catch((error) => console.log(error));
+
+
+app.use(cors({
+  origin: "https://demofinverosapidecv2.mitiendanube.com/"
+}));
