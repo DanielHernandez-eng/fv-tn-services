@@ -10,6 +10,7 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +31,3 @@ mongoose
 .then(() =>console.log("conected to mongodb"))
 .catch((error) => console.log(error));
 
-
-app.use(cors({
-  origin: "https://demofinverosapidecv2.mitiendanube.com/"
-}));
