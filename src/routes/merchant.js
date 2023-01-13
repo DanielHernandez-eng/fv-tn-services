@@ -1,6 +1,10 @@
 import { Router } from "express";
 import merchantSchema from "../models/merchant.js";
 
+app.use(cors({
+  origin: "https://demofinverosapidecv2.mitiendanube.com/"
+}));
+
 const router2 = Router();
 
 //create merchant

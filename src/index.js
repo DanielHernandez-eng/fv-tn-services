@@ -31,6 +31,3 @@ mongoose
 .catch((error) => console.log(error));
 
 
-app.use(cors({
-  origin: "https://demofinverosapidecv2.mitiendanube.com/"
-}));
