@@ -31,3 +31,4 @@ mongoose
 .catch((error) => console.log(error));
 
 
+app.use(cors());
