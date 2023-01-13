@@ -21,7 +21,7 @@ app.use(merchantRoutes);
 app.use(express.static(join(__dirname, "public")));
 
 app.use(cors({
-  origin: "*"
+  origin: "https://demofinverosapidecv2.mitiendanube.com/"
 }));
 
 app.listen(process.env.PORT || 3000);
