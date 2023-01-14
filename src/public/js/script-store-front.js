@@ -24,15 +24,17 @@ var myAppJavaScript = function ($) {
 		 that was passed as argument.*/
 
   let prodPage = document.querySelector(".product-form-container");
+  let cartPage = document.querySelector(".summary-details");
   let storeID = LS.store.id;
-  let minCreditF, maxCreditF;
-  // alert(prodPage);
+  // let ApiApp = `http://localhost:3000/merchants/${storeID}`;
+  let ApiApp = `https://fv-tn-services-production.up.railway.app/merchants/${storeID}`;
+  let ApiFinvero ="https://api-qa.finvero.com/api/v1/es/external";
 
   if (prodPage != null) {
     let productId = LS.product.id;
     let creditF;
 
-    fetch(`http://localhost:3000/merchants/${storeID}`)
+    fetch(ApiApp)
       .then((res) => res.json())
       .then((res) => {
         console.log(`access token: ${res["access_token"]}`);
@@ -59,38 +61,47 @@ var myAppJavaScript = function ($) {
     );
   }
 
-  fetch(`http://localhost:3000/merchants/${storeID}`)
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(`id token: ${res["id_token"]}`);
-      fetch(`https://api-qa.finvero.com/api/v1/es/external/auth`, {
-        method: "POST",
-        body: { token: res["id_token"] },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res["token"]);
-          fetch(
-            `https://api-qa.finvero.com/api/v1/es/external/credit/credit-range-amount`,
-            {
-              method: "GET",
-              headers: { Authorization: `bearer ${res["token"]}` },
-            }
-          )
-            .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
-              minCreditF = res["minCreditRequestAmount"];
-              maxCreditF = res["maxCreditRequestAmount"];
-            })
-            .catch((error) => console.error("error", error));
+  if (cartPage != null) {
+
+    let minCreditF, maxCreditF;
+    
+    fetch(ApiApp)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(`id token: ${res["id_token"]}`);
+        fetch(`${ApiFinvero}/auth`, {
+          method: "POST",
+          body: { token: res["id_token"] },
         })
-        .catch((error) => console.error("error", error));
-    })
-    .catch((error) => console.error("error", error));
-  $(".summary-details").append(
-    '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/styles.css"><div id="fv-c-container"><div id="fv-c-top"><div id="fv-c-img"><img src="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/finvero.jpg" width="90px" heigth="90px"/></div><div id="fv-c-text1"><div class="fv-c-text1-bold">Paga</div> tu pedido <div class="fv-c-text1-bold">a crédito</div></div></div><div id="fv-c-line"></div><div id="fv-c-bottom"><div id="fv-c-text2">Te prestamos desde</div><div id="fv-c-text3"><div class="fv-c-amount">$' + minCreditF + '</div>hasta<div class="fv-c-amount">$'+maxCreditF+"</div></div></div></div>"
-  );
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res["token"]);
+            fetch(
+              `${ApiFinvero}/external/credit/credit-range-amount`,
+              {
+                method: "GET",
+                headers: { Authorization: `bearer ${res["token"]}` },
+              }
+            )
+              .then((res) => res.json())
+              .then((res) => {
+                console.log(res);
+                minCreditF = res["minCreditRequestAmount"];
+                maxCreditF = res["maxCreditRequestAmount"];
+              })
+              .catch((error) => console.error("error", error));
+          })
+          .catch((error) => console.error("error", error));
+      })
+      .catch((error) => console.error("error", error));
+    $(".summary-details").append(
+      '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/styles.css"><div id="fv-c-container"><div id="fv-c-top"><div id="fv-c-img"><img src="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/finvero.jpg" width="90px" heigth="90px"/></div><div id="fv-c-text1"><div class="fv-c-text1-bold">Paga</div> tu pedido <div class="fv-c-text1-bold">a crédito</div></div></div><div id="fv-c-line"></div><div id="fv-c-bottom"><div id="fv-c-text2">Te prestamos desde</div><div id="fv-c-text3"><div class="fv-c-amount">$' +
+        minCreditF +
+        '</div>hasta<div class="fv-c-amount">$' +
+        maxCreditF +
+        "</div></div></div></div>"
+    );
+  }
 };
 
 // For jQuery version 1.7
