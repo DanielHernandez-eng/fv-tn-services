@@ -41,7 +41,10 @@ function searchMerchantData() {
       .then((res) => {
         if (res != null) {
           console.log(
-            `shop_id: ${res["shop_id"]} id_token: ${res["id_token"]}`
+            JSON.stringify({
+              shop_id: res["shop_id"],
+              id_token: res["id_token"],
+            })
           );
           idToken.value = res["id_token"];
           shopIDF.value = res["shop_id"];
@@ -109,7 +112,11 @@ function saveData() {
             .then((res) => res.json())
             .then((res) => {
               console.log(
-                `dato 1: ${res["access_token"]}, dato 2: ${res["scope"]}, dato 3: ${res["user_id"]}`
+                JSON.stringify({
+                  access_token: res["access_token"],
+                  access_token: res["scope"],
+                  access_token: res["user_id"],
+                })
               );
               acsT = res["access_token"];
               scopeD = res["scope"];
