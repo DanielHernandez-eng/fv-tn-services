@@ -42,7 +42,10 @@ var myAppJavaScript = function ($) {
           `https://api.tiendanube.com/v1/${storeID}/products/${productId}`,
           {
             method: "GET",
-            headers: { Authentication: `bearer ${res["access_token"]}` },
+            headers: { 
+              Authentication: `bearer ${res["access_token"]}`, 
+              "User-Agent" : "Appprueba5 (daniel.hernandez@finvero.com)" 
+            },
           }
         )
           .then((res) => res.json())
@@ -55,7 +58,7 @@ var myAppJavaScript = function ($) {
       .catch((error) => console.error("error", error));
 
     $(".product-form-container").append(
-      '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/styles.css"><div  id="fv-p-container"><div id="fv-p-img"><img src="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/finvero.jpg"/>holasoyhomerochino</div><div id="fv-p-line"></div><div id="fv-p-text"><div id="fv-p-text1-blue"> Llévatelo <div id="fv-p-text1-black">por</div> </div><div id="fv-p-text2">$' +
+      '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/styles.css"><div  id="fv-p-container"><div id="fv-p-img"><img src="https://azrfvrstorageresources.z13.web.core.windows.net/tiendanube/finvero.jpg"/></div><div id="fv-p-line"></div><div id="fv-p-text"><div id="fv-p-text1-blue"> Llévatelo <div id="fv-p-text1-black">por</div> </div><div id="fv-p-text2">$' +
         creditF +
         ' MXN</div> <div id="fv-p-text3">Quincenales</div></div></div><br>'
     );
