@@ -40,12 +40,7 @@ function searchMerchantData() {
       .then((res) => res.json())
       .then((res) => {
         if (res != null) {
-          console.log(
-            JSON.stringify({
-              shop_id: res["shop_id"],
-              id_token: res["id_token"],
-            })
-          );
+          console.log(res);
           idToken.value = res["id_token"];
           shopIDF.value = res["shop_id"];
 
