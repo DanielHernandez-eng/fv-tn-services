@@ -170,7 +170,7 @@ function saveData() {
         });
       }
 
-    console.log(raw2.json());
+    console.log(raw2);
       fetch(`${apiFinvero}${shopIDT.value}`, {
         method: "PUT",
         body: raw2,
