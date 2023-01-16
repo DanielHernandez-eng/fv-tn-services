@@ -87,7 +87,7 @@ async function saveData() {
         .then(async (result) => {
           console.log(result);
 
-            await fetch(
+          await fetch(
             "https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth",
             {
               method: "POST",
@@ -117,76 +117,70 @@ async function saveData() {
     } else {
       console.warn("code instalation is empty");
     }
-    insertData();
-  } else {
-    showAlert("Favor de llenar los campos", "danger");
-  }
-}
+    if (nuevo) {
+      if (acsT && scopeD && userId) {
+        fetch(apiFinvero, {
+          method: "POST",
+          body: JSON.stringify({
+            shop_id: shopIDF.value,
+            id_token: idToken.value,
+            access_token: acsT,
+            scope: scopeD,
+            user_id: userId,
+          }),
+          headers: { "Content-type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res))
+          .catch((error) => console.error("error", error));
+        showAlert("Registro guardado", "success");
 
-function insertData(){
-  
-  if (nuevo) {
-    if (acsT && scopeD && userId) {
-      fetch(apiFinvero, {
-        method: "POST",
-        body: JSON.stringify({
+        fetch(`https://api.tiendanube.com/v1/${userId}/scripts`, {
+          method: "POST",
+          body: JSON.stringify({
+            src: `${baseUrl}fv-tn-services/src/public/js/script-store-front.js`,
+            event: "onfirstinteraction",
+            where: "store,checkout",
+          }),
+          headers: {
+            "Content-type": "application/json",
+            Authentication: `bearer ${acsT}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res))
+          .catch((error) => console.error("error", error));
+      } else {
+        showAlert("credenciales tiendanube vacias", "danger");
+      }
+    } else {
+      let raw2;
+      console.log("esto trae access token: " + acsT);
+      if (acsT) {
+        raw2 = JSON.stringify({
+          access_token: acsT,
           shop_id: shopIDF.value,
           id_token: idToken.value,
-          access_token: acsT,
-          scope: scopeD,
-          user_id: userId,
-        }),
+        });
+      } else {
+        raw2 = JSON.stringify({
+          shop_id: shopIDF.value,
+          id_token: idToken.value,
+        });
+      }
+
+      console.log(raw2);
+      fetch(`${apiFinvero}${shopIDT.value}`, {
+        method: "PUT",
+        body: raw2,
         headers: { "Content-type": "application/json" },
       })
         .then((res) => res.json())
-        .then((res) => console.log(res))
+        .then((res) => console.log(res["matchedCount"]))
         .catch((error) => console.error("error", error));
-      showAlert("Registro guardado", "success");
-
-      fetch(`https://api.tiendanube.com/v1/${userId}/scripts`, {
-        method: "POST",
-        body: JSON.stringify({
-          src: `${baseUrl}fv-tn-services/src/public/js/script-store-front.js`,
-          event: "onfirstinteraction",
-          where: "store,checkout",
-        }),
-        headers: {
-          "Content-type": "application/json",
-          Authentication: `bearer ${acsT}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => console.log(res))
-        .catch((error) => console.error("error", error));
-    } else {
-      showAlert("credenciales tiendanube vacias", "danger");
+      showAlert("Registro actualizado", "success");
     }
   } else {
-
-    let raw2;
-    console.log("esto trae access token: " + acsT);
-    if (acsT) {
-      raw2 = JSON.stringify({
-        access_token: acsT,
-        shop_id: shopIDF.value,
-        id_token: idToken.value,
-      });
-    } else {
-      raw2 = JSON.stringify({
-        shop_id: shopIDF.value,
-        id_token: idToken.value,
-      });
-    }
-
-  console.log(raw2);
-    fetch(`${apiFinvero}${shopIDT.value}`, {
-      method: "PUT",
-      body: raw2,
-      headers: { "Content-type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res["matchedCount"]))
-      .catch((error) => console.error("error", error));
-    showAlert("Registro actualizado", "success");
+    showAlert("Favor de llenar los campos", "danger");
   }
 }
