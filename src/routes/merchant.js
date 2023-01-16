@@ -24,9 +24,9 @@ router2.get("/merchants/:id", (req, res) => {
 //update a merchant
 router2.put("/merchants/:id", (req, res) => {
   const { id } = req.params;
-  const { shop_id, id_token } = req.body;
+  const { shop_id, id_token, access_token } = req.body;
   merchantSchema
-    .updateOne({ user_id: id }, { $set: {shop_id, id_token} })
+    .updateOne({ user_id: id }, { $set: {shop_id, id_token, access_token} })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });

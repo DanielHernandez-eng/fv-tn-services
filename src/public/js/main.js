@@ -159,12 +159,23 @@ function saveData() {
         showAlert("credenciales tiendanube vacias", "danger");
       }
     } else {
-      fetch(`${apiFinvero}${shopIDT.value}`, {
-        method: "PUT",
-        body: JSON.stringify({
+      let raw2;
+
+      if (acsT) {
+        raw2 = JSON.stringify({
+          access_token: acsT,
           shop_id: shopIDF.value,
           id_token: idToken.value,
-        }),
+        });
+      } else {
+        raw2 = JSON.stringify({
+          shop_id: shopIDF.value,
+          id_token: idToken.value,
+        });
+      }
+      fetch(`${apiFinvero}${shopIDT.value}`, {
+        method: "PUT",
+        body: raw2,
         headers: { "Content-type": "application/json" },
       })
         .then((res) => res.json())
