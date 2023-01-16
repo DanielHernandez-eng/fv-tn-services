@@ -33,7 +33,7 @@ const showAlert = (message, type) => {
   alertPlaceholder.append(wrapper);
 };
 
-function searchMerchantData() {
+async function searchMerchantData() {
   let idtn = shopIDT.value;
   if (idtn) {
     fetch(`${apiFinvero}${idtn}`)
@@ -79,15 +79,15 @@ async function saveData() {
         redirect: "follow",
       };
 
-      fetch(
+      await fetch(
         "https://api-qa.finvero.com/api/v1/es/external/auth",
         requestOptions
       )
         .then((result) => result.json())
-        .then(async (result) => {
+        .then((result) => {
           console.log(result);
 
-            await fetch(
+            fetch(
             "https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth",
             {
               method: "POST",
