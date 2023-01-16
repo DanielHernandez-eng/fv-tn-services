@@ -84,10 +84,10 @@ function saveData() {
         requestOptions
       )
         .then((result) => result.json())
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
 
-          fetch(
+            await fetch(
             "https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth",
             {
               method: "POST",
@@ -155,7 +155,7 @@ function saveData() {
         showAlert("credenciales tiendanube vacias", "danger");
       }
     } else {
-      
+
       let raw2;
       console.log("esto trae access token: " + acsT);
       if (acsT) {
