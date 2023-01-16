@@ -84,10 +84,10 @@ async function saveData() {
         requestOptions
       )
         .then((result) => result.json())
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
 
-            fetch(
+            await fetch(
             "https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth",
             {
               method: "POST",
