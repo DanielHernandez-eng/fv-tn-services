@@ -169,6 +169,8 @@ function saveData() {
           id_token: idToken.value,
         });
       }
+
+    console.log(raw2.json());
       fetch(`${apiFinvero}${shopIDT.value}`, {
         method: "PUT",
         body: raw2,
