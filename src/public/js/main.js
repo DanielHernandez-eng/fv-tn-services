@@ -85,7 +85,7 @@ function saveData() {
       )
         .then((result) => result.json())
         .then((result) => {
-          console.log(result["token"]);
+          console.log(result);
 
           fetch(
             "https://api-qa.finvero.com/api/v1/es/external/tiendanube/auth",
@@ -106,13 +106,7 @@ function saveData() {
           )
             .then((res) => res.json())
             .then((res) => {
-              console.log(
-                JSON.stringify({
-                  access_token: res["access_token"],
-                  access_token: res["scope"],
-                  access_token: res["user_id"],
-                })
-              );
+              console.log(res);
               acsT = res["access_token"];
               scopeD = res["scope"];
               userId = res["user_id"];
@@ -138,7 +132,7 @@ function saveData() {
           headers: { "Content-type": "application/json" },
         })
           .then((res) => res.json())
-          .then((res) => console.log(`${res}`))
+          .then((res) => console.log(res))
           .catch((error) => console.error("error", error));
         showAlert("Registro guardado", "success");
 
@@ -155,7 +149,7 @@ function saveData() {
           },
         })
           .then((res) => res.json())
-          .then((res) => console.log(`${res}`))
+          .then((res) => console.log(res))
           .catch((error) => console.error("error", error));
       } else {
         showAlert("credenciales tiendanube vacias", "danger");
